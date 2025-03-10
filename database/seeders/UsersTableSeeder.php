@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'id' => $userId,
                 'username' => $faker->unique()->userName,
-                'name' => $faker->name,
+                'name_jp' => $faker->name,
                 'name_kana' => $faker->lastName . ' ' . $faker->firstName, // Simulating name_kana
                 'gender' => $faker->randomElement(['male', 'female', 'other']), // Custom gender values
                 'email' => $faker->unique()->safeEmail,

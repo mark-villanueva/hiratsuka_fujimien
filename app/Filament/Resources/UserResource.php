@@ -125,7 +125,7 @@ class UserResource extends Resource
                                             : ['unique:users,email'];
                                     }),
 
-                                Forms\Components\TextInput::make('name')
+                                Forms\Components\TextInput::make('name_jp')
                                     ->label('氏名')
                                     ->required()
                                     ->maxLength(255),
@@ -184,11 +184,17 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('media')->label('Avatar')
-                    ->collection('avatars')
-                    ->wrap(),
+                // SpatieMediaLibraryImageColumn::make('media')->label('Avatar')
+                //     ->collection('avatars')
+                //     ->wrap(),
                 Tables\Columns\TextColumn::make('username')->label('Username')
                     ->description(fn(Model $record) => $record->firstname . ' ' . $record->lastname)
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name_jp')->label('Name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('name_kana')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('employment_form')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')->label('Role')
                     ->formatStateUsing(fn($state): string => Str::headline($state))
@@ -196,9 +202,9 @@ class UserResource extends Resource
                     ->badge(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')->label('Verified at')
-                    ->dateTime()
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('email_verified_at')->label('Verified at')
+                //     ->dateTime()
+                //     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
